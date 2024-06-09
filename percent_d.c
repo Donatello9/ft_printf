@@ -6,36 +6,27 @@
 /*   By: siligh <siligh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:48:09 by siligh            #+#    #+#             */
-/*   Updated: 2024/06/07 15:56:44 by siligh           ###   ########.fr       */
+/*   Updated: 2024/06/09 15:19:00 by siligh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libprintf.h"
 
-
-
-void	percent_d(double n)
+void	percent_d(int n)
 {
 	char	c;
-    double dec;
-    int nb;
+	long	nb;
 
-    nb = (int) n;
-    dec = n - nb;
-	if (n < 0)
+	nb = n;
+	if (nb < 0)
 	{
 		write(1, "-", 1);
-		n *= -1;
+		nb *= -1;
 	}
-	if (n >= 10)
+	if (nb >= 10)
 	{
-		percent_d((int)(n / 10));
+		percent_d((nb / 10));
 	}
-	c = (int)n % 10 + '0';
+	c = nb % 10 + '0';
 	write(1, &c, 1);
-}
-
-int	main(void)
-{
-	percent_d(-4462);
 }
