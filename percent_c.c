@@ -6,13 +6,17 @@
 /*   By: siligh <siligh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:46:53 by siligh            #+#    #+#             */
-/*   Updated: 2024/06/07 14:47:53 by siligh           ###   ########.fr       */
+/*   Updated: 2024/06/11 13:02:37 by siligh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libprintf.h"
 
-void	percent_c(char c)
+int	percent_c(char c)
 {
+	int s;
+
+	s = 1;
 	write(1, &c, 1);
+	return (s);
 }

@@ -6,23 +6,39 @@
 /*   By: siligh <siligh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:16:41 by siligh            #+#    #+#             */
-/*   Updated: 2024/06/09 15:16:42 by siligh           ###   ########.fr       */
+/*   Updated: 2024/06/11 13:09:37 by siligh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	percent_x(int n)
+int	percent_x(int n)
 {
-	char	tab[] = "0123456789ABCDEF";
+	char	tab[] = "0123456789abcdef";
 	long	nb;
-	char	c;
+	char	resu[16];
+	int		i;
+	int		s;
 
 	nb = n;
-	if (nb >= 16)
+	i = 0;
+	s = 0;
+	if (nb == 0)
 	{
-		percent_x(nb / 16);
+		write(1, "0", 1);
+		s++;
 	}
-	c = tab[nb % 16];
-	write(1, &c, 1);
+	while (nb > 0)
+	{
+		resu[i] = tab[nb % 16];
+		nb /= 16;
+		i++;
+		s++;
+	}
+	while (i > 0)
+	{
+		i--;
+		write(1, &resu[i], 1);
+	}
+	return (s);
 }

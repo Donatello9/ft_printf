@@ -6,7 +6,7 @@
 /*   By: siligh <siligh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:33:29 by siligh            #+#    #+#             */
-/*   Updated: 2024/06/09 15:23:16 by siligh           ###   ########.fr       */
+/*   Updated: 2024/06/11 13:11:09 by siligh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ int	ft_printf(const char *str, ...)
 {
 	size_t	i;
 	size_t	count;
+	int		tank;
 	va_list	ap;
 
+	tank = 0;
 	va_start(ap, str);
 	i = 0;
 	while (str[i])
@@ -26,29 +28,34 @@ int	ft_printf(const char *str, ...)
 		{
 			write(1, &str[i], 1);
 			i++;
+			tank++;
 		}
 		i++;
 		if (str[i] == 'c')
-			ft_print_c(va_arg(ap, int));
-		if
-			else(str[i] == 's') percent_s(va_arg(ap, char *));
-		if
-			else(str[i] == 'p') percent_p(va_arg(ap, void));
-		if
-			else(str[i] == 'd') percent_d(va_arg(ap, int));
-		if
-			else(str[i] == 'i') percent_d(va_arg(ap, int));
-		if
-			else(str[i] == 'u') percent_u(va_arg(ap, unsigned int));
-		if
-			else(str[i] == 'x') percent_x(va_arg(ap, int));
-		if
-			else(str[i] == 'X') percent_X(va_arg(ap, int));
-		if
-			else(str[i] == '%') write(1, "%", 1);
-
-        i++;
+			tank += ft_print_c(va_arg(ap, int));
+		else if (str[i] == 's')
+			tank += ft_print_s(va_arg(ap, char *));
+		// if else (str[i] == 'p')
+		// ft_print_p(va_arg(ap, void));
+		else if (str[i] == 'd')
+			tank += ft_print_d(va_arg(ap, int));
+		else if (str[i] == 'i')
+			tank += ft_print_d(va_arg(ap, int));
+		else if (str[i] == 'u')
+			tank += ft_print_u(va_arg(ap, unsigned int));
+		else if (str[i] == 'x')
+			tank += ft_print_x(va_arg(ap, int));
+		else if (str[i] == 'X')
+			tank += ft_print_X(va_arg(ap, int));
+		else if (str[i] == '%')
+		{
+			write(1, "%", 1);
+			tank++;
+		}
+		i++;
 	}
+	va_end(ap);
+	return (tank);
 }
 
 int	main(void)
