@@ -6,17 +6,22 @@
 /*   By: siligh <siligh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:49:17 by siligh            #+#    #+#             */
-/*   Updated: 2024/06/11 13:02:59 by siligh           ###   ########.fr       */
+/*   Updated: 2024/06/12 13:37:27 by siligh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libprintf.h"
 
-void	percent_s(char *str)
+int	percent_s(char *str)
 {
-	size_t i;
+	int	i;
 
 	i = 0;
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
 	while (str[i])
 	{
 		write(1, &str[i], 1);

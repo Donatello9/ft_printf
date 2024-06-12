@@ -6,7 +6,7 @@
 /*   By: siligh <siligh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:48:09 by siligh            #+#    #+#             */
-/*   Updated: 2024/06/11 13:08:33 by siligh           ###   ########.fr       */
+/*   Updated: 2024/06/12 15:21:55 by siligh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,24 @@
 
 int	percent_d(int n)
 {
-	char	c;
+	char	*resu;
 	long	nb;
-	char	resu[10];
 	int		i;
 	int		s;
+	int		temp;
 
 	nb = n;
 	i = 0;
+	temp = 0;
+	s = 0;
+	while (temp > 0)
+	{
+		temp /= 16;
+		s++;
+	}
+	resu = (char *)malloc((s + 1) * sizeof(char));
+	if (!resu)
+		return (0);
 	s = 0;
 	if (nb < 0)
 	{
@@ -34,7 +44,7 @@ int	percent_d(int n)
 		write(1, "0", 1);
 		s++;
 	}
-	if (nb > 0)
+	while (nb > 0)
 	{
 		resu[i] = (nb % 10) + '0';
 		nb /= 10;
