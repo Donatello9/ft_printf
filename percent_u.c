@@ -6,7 +6,7 @@
 /*   By: siligh <siligh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:48:09 by siligh            #+#    #+#             */
-/*   Updated: 2024/06/12 13:37:26 by siligh           ###   ########.fr       */
+/*   Updated: 2024/06/14 20:58:22 by siligh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,19 @@
 
 int	percent_u(unsigned int n)
 {
-	char			c;
-	char			*resu;
-	unsigned long	nb;
-	int				i;
-	int				s;
-	int				temp;
+	int		s;
+	char	c;
 
-	nb = n;
-	temp = 0;
-	i = 0;
 	s = 0;
-	while (temp > 0)
+	if (n >= 10)
 	{
-		temp /= 16;
-		s++;
+		s += ft_print_u(n / 10);
+		s += ft_print_u(n % 10);
 	}
-	resu = (char *)malloc((s + 1) * sizeof(char));
-	if (!resu)
-		return (0);
-	s = 0;
-	if (nb == 0)
+	else
 	{
-		write(1, "0", 1);
-		s++;
-	}
-	while (nb > 0)
-	{
-		resu[i] = (nb % 10) + '0';
-		nb /= 10;
-		i++;
-	}
-	while (i > 0)
-	{
-		i--;
-		s++;
-		write(1, &resu[i], 1);
+		c = n + '0';
+		s += write(1, &c, 1);
 	}
 	return (s);
 }

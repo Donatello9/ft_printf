@@ -6,52 +6,25 @@
 /*   By: siligh <siligh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:16:41 by siligh            #+#    #+#             */
-/*   Updated: 2024/06/12 13:37:38 by siligh           ###   ########.fr       */
+/*   Updated: 2024/06/14 20:58:56 by siligh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libprintf.h"
 
-int	percent_x(unsigned long long n)
+int	percent_x(unsigned int n)
 {
-	char				tab[] = "0123456789abcdef";
-	unsigned long long	nb;
-	char				*resu;
-	int					i;
-	int					s;
-	int					temp;
+	char	*tab;
+	char	c;
+	int		s;
 
-	nb = n;
-	i = 0;
+	tab = "0123456789abcdef";
 	s = 0;
-	temp = nb;
-	while (temp > 0)
+	if (n >= 16)
 	{
-		temp /= 16;
-		s++;
+		s += ft_print_x(n / 16);
 	}
-	resu = (char *)malloc((s + 1) * sizeof(char));
-	if (!resu)
-		return (0);
-	s = 0;
-	if (nb == 0)
-	{
-		write(1, "0", 1);
-		free(resu);
-		return (1);
-	}
-	while (nb > 0)
-	{
-		resu[i] = tab[nb % 16];
-		nb /= 16;
-		i++;
-	}
-	while (i > 0)
-	{
-		i--;
-		s++;
-		write(1, &resu[i], 1);
-	}
-	free(resu);
+	c = tab[n % 16];
+	s += write(1, &c, 1);
 	return (s);
 }
